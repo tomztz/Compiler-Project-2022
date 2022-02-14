@@ -8,11 +8,10 @@ import java.util.Stack;
 %{
 StringBuilder sb = new StringBuilder();
 %}
+
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 WhiteSpace     = {LineTerminator} | [ \t\f]
-WHITE_SPACE_CHAR=[\\n\\r\\ \\t\\b\\012]
-STRING_Literal=(\\\"|[^\n\r\"]|\\{WHITE_SPACE_CHAR}+\\)*
 /* comments */
 Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
 
@@ -25,6 +24,7 @@ CommentContent       = ( [^*] | \*+ [^/*] )*
 Identifier = [:jletter:] [:jletterdigit:]*
 
 DIGIT=[0-9]
+
 
 %state STRING
 %state INTEGER
@@ -64,7 +64,7 @@ DIGIT=[0-9]
 
 
 }
-!{DIGIT}+                      {throw new Error("Illegal character <"+
+[^0-9]*                      {throw new Error("Illegal character <"+
                                                 yytext()+">");}
 {DIGIT}+                       {sb.append(yytext());}
 }
