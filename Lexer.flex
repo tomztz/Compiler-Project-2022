@@ -6,13 +6,13 @@ import java.util.Stack;
 %debug
 
 %{
-StringBuffer stringBuffer = new StringBuffer();
+StringBuilder sb = new StringBuilder();
 %}
-
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 WhiteSpace     = {LineTerminator} | [ \t\f]
-
+WHITE_SPACE_CHAR=[\\n\\r\\ \\t\\b\\012]
+STRING_Literal=(\\\"|[^\n\r\"]|\\{WHITE_SPACE_CHAR}+\\)*
 /* comments */
 Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
 
@@ -24,10 +24,10 @@ CommentContent       = ( [^*] | \*+ [^/*] )*
 
 Identifier = [:jletter:] [:jletterdigit:]*
 
-DecIntegerLiteral = 0 | [1-9][0-9]*
+DIGIT=[0-9]
 
 %state STRING
-
+%state INTEGER
 %%
 
 
@@ -36,8 +36,8 @@ DecIntegerLiteral = 0 | [1-9][0-9]*
 {Identifier}                   { return new Yytoken(SymbolTable.IDENTIFIER,yytext()); }
 
 /* literals */
-\"                             { stringBuffer.setLength(0); yybegin(STRING); }
 
+\"                             { sb.setLength(0); yybegin(STRING); }
 /* operators */
 "="                            { return new Yytoken(SymbolTable.EQ, yytext()); }
 
@@ -46,21 +46,39 @@ DecIntegerLiteral = 0 | [1-9][0-9]*
 
 /* whitespace */
 {WhiteSpace}                   { /* ignore */ }
+
+{DIGIT}                        { sb.setLength(0); sb.append(yytext());yybegin(INTEGER);}                         
+}
+<INTEGER>{
+{WhiteSpace}                   {yybegin(YYINITIAL);
+                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
+                                    throw new Error("Integer out of bound <"+
+                                                yytext()+">");}
+                                else{return new Yytoken(SymbolTable.INTEGER,sb.toString());}
+}
+<<EOF>>                        {yybegin(YYINITIAL);
+                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
+                                    throw new Error("Integer out of bound <"+
+                                                yytext()+">");}
+                                else{return new Yytoken(SymbolTable.INTEGER,sb.toString());}
+
+
+}
+!{DIGIT}+                      {throw new Error("Illegal character <"+
+                                                yytext()+">");}
+{DIGIT}+                       {sb.append(yytext());}
 }
 
-<STRING> {
+<STRING>{
 \"                             { yybegin(YYINITIAL);
                                return new Yytoken(SymbolTable.STRING_LITERAL,
-                               stringBuffer.toString()); }
-[^\n\r\"\\]+                   { stringBuffer.append( yytext() ); }
-\\t                            { stringBuffer.append('\t'); }
-\\n                            { stringBuffer.append('\n'); }
-
-\\r                            { stringBuffer.append('\r'); }
-\\\"                           { stringBuffer.append('\"'); }
-\\                             { stringBuffer.append('\\'); }
+                               sb.toString()); }
+<<EOF>>                         {throw new Error("Illegal character <"+
+                                                yytext()+">");}
+[^\n\r\"\\]+                   { sb.append( yytext() ); }
+\\                              {throw new Error("Illegal character <"+
+                                                yytext()+">");}
 }
-
 /* error fallback */
 [^]                              { throw new Error("Illegal character <"+
                                                 yytext()+">"); }
