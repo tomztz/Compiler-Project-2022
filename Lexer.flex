@@ -26,6 +26,7 @@ Symbols = ";"|"<"|">"|"=="|"<="|">="|"!="|"!"|"+"|"."|"="|"-"|"*"|"/"|"mod"|"and
 IntegerRex = -?{DIGIT}
 %state STRING
 %state INTEGER
+%state INT_VALID
 %%
 
 
@@ -50,43 +51,8 @@ IntegerRex = -?{DIGIT}
 
 }
 <INTEGER>{
-{WhiteSpace}                   {yybegin(YYINITIAL);
-                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else{return new Yytoken(SymbolTable.INTEGER,sb.toString());}
-                                }
-                                
 
-<<EOF>>                        {yybegin(YYINITIAL);
-                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else{return new Yytoken(SymbolTable.INTEGER,sb.toString());}
-                                }
-                                
-{Symbols}                       {yybegin(YYINITIAL);
-                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else{
-                                    return new Yytoken(SymbolTable.INTEGER,sb.toString());}
-                                
-                                }
-
-
-[^0-9]*                      {throw new Error("Illegal character <"+
-                                                yytext()+">");}
-{DIGIT}+                     {yybegin(YYINITIAL);sb.append(yytext());
+{DIGIT}+                     {yybegin(INT_VALID);sb.append(yytext());
                             if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
                                     throw new Error("Integer out of bound <"+
                                                 yytext()+">");}
@@ -108,6 +74,15 @@ IntegerRex = -?{DIGIT}
                                                 yytext()+">");}
 }
 
+<INT_VALID>{
+    
+    {Symbols}                   {yybegin(YYINITIAL);return new Yytoken(SymbolTable.SYMBOL,yytext());}
+
+    {WhiteSpace}                {yybegin(YYINITIAL);}
+
+    (!{Symbols}&&!{WhiteSpace})                    {throw new Error("Illegal character <"+
+                                                yytext()+">");}                                 
+}
 /* error fallback */
 [^]                              { throw new Error("Illegal character <"+
                                                 yytext()+">"); }

@@ -18,6 +18,7 @@ class Lexer {
   public static final int YYINITIAL = 0;
   public static final int STRING = 2;
   public static final int INTEGER = 4;
+  public static final int INT_VALID = 6;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -26,7 +27,7 @@ class Lexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  2, 2
+     0,  0,  1,  1,  2,  2,  3, 3
   };
 
   /** 
@@ -216,12 +217,12 @@ class Lexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\2\0\2\1\2\2\13\3\1\4\1\1\1\5\3\4"+
-    "\1\6\1\7\1\10\1\1\2\11\3\1\1\12\1\13"+
-    "\1\12\1\1\1\14\13\3\1\2\2\1\17\3";
+    "\3\0\2\1\2\2\13\3\1\4\1\1\1\5\3\4"+
+    "\1\6\1\7\1\10\1\11\1\1\2\12\3\1\2\13"+
+    "\1\1\1\14\13\3\1\2\2\1\17\3";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[66];
+    int [] result = new int[67];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -246,18 +247,18 @@ class Lexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\42\0\104\0\146\0\210\0\146\0\252\0\314"+
+    "\0\0\0\42\0\104\0\146\0\210\0\252\0\210\0\314"+
     "\0\356\0\u0110\0\u0132\0\u0154\0\u0176\0\u0198\0\u01ba\0\u01dc"+
-    "\0\u01fe\0\u0220\0\u0242\0\146\0\146\0\u0264\0\u0286\0\146"+
-    "\0\u02a8\0\146\0\u02ca\0\u02ec\0\u02ca\0\u030e\0\u0330\0\u0352"+
-    "\0\u02ca\0\u0374\0\u0396\0\u03b8\0\356\0\u03da\0\u03fc\0\u041e"+
+    "\0\u01fe\0\u0220\0\u0242\0\u0264\0\210\0\210\0\u0286\0\u02a8"+
+    "\0\210\0\u02ca\0\210\0\u02ec\0\u030e\0\u0330\0\u030e\0\u0352"+
+    "\0\u0374\0\u0396\0\u030e\0\u03b8\0\u03da\0\u0110\0\u03fc\0\u041e"+
     "\0\u0440\0\u0462\0\u0484\0\u04a6\0\u04c8\0\u04ea\0\u050c\0\u052e"+
     "\0\u0550\0\u0572\0\u0594\0\u05b6\0\u05d8\0\u05fa\0\u061c\0\u063e"+
     "\0\u0660\0\u0682\0\u06a4\0\u06c6\0\u06e8\0\u070a\0\u072c\0\u074e"+
-    "\0\u0770\0\u0792";
+    "\0\u0770\0\u0792\0\u07b4";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[66];
+    int [] result = new int[67];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -280,61 +281,58 @@ class Lexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\4\1\5\2\6\1\7\1\10\1\11\1\12\1\13"+
-    "\2\11\1\14\1\11\1\15\1\16\1\11\1\17\1\20"+
-    "\1\21\3\11\1\22\1\23\1\11\1\4\1\24\1\25"+
-    "\2\26\1\27\1\11\1\30\1\4\1\31\2\4\35\31"+
-    "\1\32\1\4\1\33\1\34\2\35\2\33\1\36\2\33"+
-    "\1\37\5\33\1\40\6\33\1\41\3\33\1\42\1\41"+
-    "\2\43\1\41\1\44\2\33\44\0\1\6\43\0\1\11"+
-    "\1\45\1\46\17\11\2\0\3\11\4\0\1\11\6\0"+
-    "\5\11\1\47\5\11\1\15\6\11\2\0\3\11\4\0"+
-    "\1\11\6\0\22\11\2\0\3\11\4\0\1\11\6\0"+
-    "\12\11\1\50\6\11\1\51\2\0\3\11\4\0\1\11"+
-    "\6\0\5\11\1\52\14\11\2\0\3\11\4\0\1\11"+
-    "\6\0\5\11\1\53\14\11\2\0\3\11\4\0\1\11"+
-    "\6\0\10\11\1\54\11\11\2\0\3\11\4\0\1\11"+
-    "\6\0\11\11\1\55\10\11\2\0\3\11\4\0\1\11"+
-    "\6\0\3\11\1\56\16\11\2\0\3\11\4\0\1\11"+
-    "\6\0\5\11\1\57\14\11\2\0\3\11\4\0\1\11"+
-    "\6\0\12\11\1\60\7\11\2\0\3\11\4\0\1\11"+
-    "\30\0\1\61\42\0\1\61\47\0\1\25\36\0\1\24"+
-    "\7\0\1\31\2\0\35\31\2\0\32\33\1\0\11\33"+
-    "\1\35\27\33\1\0\20\33\1\62\20\33\1\0\25\33"+
-    "\1\41\13\33\1\0\15\33\1\63\23\33\1\0\7\33"+
-    "\32\0\1\42\7\0\32\33\1\0\2\33\1\41\15\33"+
-    "\1\63\20\33\1\0\7\33\4\0\3\11\1\45\16\11"+
-    "\2\0\3\11\4\0\1\11\6\0\12\11\1\45\7\11"+
-    "\2\0\3\11\4\0\1\11\6\0\6\11\1\64\13\11"+
-    "\2\0\3\11\4\0\1\11\6\0\11\11\1\65\10\11"+
-    "\2\0\3\11\4\0\1\11\6\0\6\11\1\66\13\11"+
-    "\2\0\3\11\4\0\1\11\6\0\5\11\1\67\14\11"+
-    "\2\0\3\11\4\0\1\11\6\0\14\11\1\64\5\11"+
-    "\2\0\3\11\4\0\1\11\6\0\3\11\1\70\16\11"+
-    "\2\0\3\11\4\0\1\11\6\0\12\11\1\71\7\11"+
-    "\2\0\3\11\4\0\1\11\6\0\1\72\21\11\2\0"+
-    "\3\11\4\0\1\11\6\0\1\73\21\11\2\0\3\11"+
-    "\4\0\1\11\2\0\1\61\1\5\1\6\37\61\7\33"+
-    "\1\41\22\33\1\0\17\33\1\41\21\33\1\0\7\33"+
-    "\4\0\11\11\1\45\10\11\2\0\3\11\4\0\1\11"+
-    "\6\0\2\11\1\45\17\11\2\0\3\11\4\0\1\11"+
-    "\6\0\7\11\1\74\12\11\2\0\3\11\4\0\1\11"+
-    "\6\0\10\11\1\45\11\11\2\0\3\11\4\0\1\11"+
-    "\6\0\6\11\1\75\13\11\2\0\3\11\4\0\1\11"+
-    "\6\0\1\76\5\11\1\77\13\11\2\0\3\11\4\0"+
-    "\1\11\6\0\4\11\1\45\15\11\2\0\3\11\4\0"+
-    "\1\11\6\0\2\11\1\100\17\11\2\0\3\11\4\0"+
-    "\1\11\6\0\10\11\1\64\11\11\2\0\3\11\4\0"+
-    "\1\11\6\0\12\11\1\65\7\11\2\0\3\11\4\0"+
-    "\1\11\6\0\2\11\1\101\17\11\2\0\3\11\4\0"+
-    "\1\11\6\0\20\11\1\46\1\11\2\0\3\11\4\0"+
-    "\1\11\6\0\3\11\1\102\16\11\2\0\3\11\4\0"+
-    "\1\11\6\0\17\11\1\45\2\11\2\0\3\11\4\0"+
-    "\1\11\6\0\1\11\1\45\20\11\2\0\3\11\4\0"+
-    "\1\11\2\0";
+    "\1\5\1\6\2\7\1\10\1\11\1\12\1\13\1\14"+
+    "\2\12\1\15\1\12\1\16\1\17\1\12\1\20\1\21"+
+    "\1\22\3\12\1\23\1\24\1\12\1\5\1\25\1\26"+
+    "\2\27\1\30\1\12\1\31\1\5\1\32\2\5\35\32"+
+    "\1\33\33\5\1\34\7\5\1\35\1\36\2\37\2\35"+
+    "\1\40\2\35\1\41\5\35\1\42\6\35\1\43\4\35"+
+    "\1\43\2\44\1\43\1\45\2\35\44\0\1\7\43\0"+
+    "\1\12\1\46\1\47\17\12\2\0\3\12\4\0\1\12"+
+    "\6\0\5\12\1\50\5\12\1\16\6\12\2\0\3\12"+
+    "\4\0\1\12\6\0\22\12\2\0\3\12\4\0\1\12"+
+    "\6\0\12\12\1\51\6\12\1\52\2\0\3\12\4\0"+
+    "\1\12\6\0\5\12\1\53\14\12\2\0\3\12\4\0"+
+    "\1\12\6\0\5\12\1\54\14\12\2\0\3\12\4\0"+
+    "\1\12\6\0\10\12\1\55\11\12\2\0\3\12\4\0"+
+    "\1\12\6\0\11\12\1\56\10\12\2\0\3\12\4\0"+
+    "\1\12\6\0\3\12\1\57\16\12\2\0\3\12\4\0"+
+    "\1\12\6\0\5\12\1\60\14\12\2\0\3\12\4\0"+
+    "\1\12\6\0\12\12\1\61\7\12\2\0\3\12\4\0"+
+    "\1\12\30\0\1\62\42\0\1\62\47\0\1\26\36\0"+
+    "\1\25\7\0\1\32\2\0\35\32\34\0\1\34\7\0"+
+    "\44\35\1\37\50\35\1\63\46\35\1\43\31\35\1\64"+
+    "\70\35\1\43\15\35\1\64\30\35\4\0\3\12\1\46"+
+    "\16\12\2\0\3\12\4\0\1\12\6\0\12\12\1\46"+
+    "\7\12\2\0\3\12\4\0\1\12\6\0\6\12\1\65"+
+    "\13\12\2\0\3\12\4\0\1\12\6\0\11\12\1\66"+
+    "\10\12\2\0\3\12\4\0\1\12\6\0\6\12\1\67"+
+    "\13\12\2\0\3\12\4\0\1\12\6\0\5\12\1\70"+
+    "\14\12\2\0\3\12\4\0\1\12\6\0\14\12\1\65"+
+    "\5\12\2\0\3\12\4\0\1\12\6\0\3\12\1\71"+
+    "\16\12\2\0\3\12\4\0\1\12\6\0\12\12\1\72"+
+    "\7\12\2\0\3\12\4\0\1\12\6\0\1\73\21\12"+
+    "\2\0\3\12\4\0\1\12\6\0\1\74\21\12\2\0"+
+    "\3\12\4\0\1\12\2\0\1\62\1\6\1\7\37\62"+
+    "\7\35\1\43\42\35\1\43\31\35\4\0\11\12\1\46"+
+    "\10\12\2\0\3\12\4\0\1\12\6\0\2\12\1\46"+
+    "\17\12\2\0\3\12\4\0\1\12\6\0\7\12\1\75"+
+    "\12\12\2\0\3\12\4\0\1\12\6\0\10\12\1\46"+
+    "\11\12\2\0\3\12\4\0\1\12\6\0\6\12\1\76"+
+    "\13\12\2\0\3\12\4\0\1\12\6\0\1\77\5\12"+
+    "\1\100\13\12\2\0\3\12\4\0\1\12\6\0\4\12"+
+    "\1\46\15\12\2\0\3\12\4\0\1\12\6\0\2\12"+
+    "\1\101\17\12\2\0\3\12\4\0\1\12\6\0\10\12"+
+    "\1\65\11\12\2\0\3\12\4\0\1\12\6\0\12\12"+
+    "\1\66\7\12\2\0\3\12\4\0\1\12\6\0\2\12"+
+    "\1\102\17\12\2\0\3\12\4\0\1\12\6\0\20\12"+
+    "\1\47\1\12\2\0\3\12\4\0\1\12\6\0\3\12"+
+    "\1\103\16\12\2\0\3\12\4\0\1\12\6\0\17\12"+
+    "\1\46\2\12\2\0\3\12\4\0\1\12\6\0\1\12"+
+    "\1\46\20\12\2\0\3\12\4\0\1\12\2\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[1972];
+    int [] result = new int[2006];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -372,11 +370,11 @@ class Lexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\2\0\1\1\1\11\1\1\1\11\15\1\2\11\2\1"+
+    "\3\0\1\1\1\11\1\1\1\11\15\1\2\11\2\1"+
     "\1\11\1\1\1\11\50\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[66];
+    int [] result = new int[67];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -786,22 +784,9 @@ String op = "";
             switch (zzLexicalState) {
             case STRING: {
               System.out.println("match: <<EOF>>");
-              System.out.println("action [104] { throw new Error(\"Illegal character <\"+"+ZZ_NL+"                                                yytext()+\">\"); }");
+              System.out.println("action [70] { throw new Error(\"Illegal character <\"+"+ZZ_NL+"                                                yytext()+\">\"); }");
               throw new Error("Illegal character <"+
                                                 yytext()+">");
-            }  // fall though
-            case 67: break;
-            case INTEGER: {
-              System.out.println("match: <<EOF>>");
-              System.out.println("action [64] { yybegin(YYINITIAL);"+ZZ_NL+"                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else{return new Yytoken(SymbolTable.INTEGER,sb.toString());} }");
-              yybegin(YYINITIAL);
-                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else{return new Yytoken(SymbolTable.INTEGER,sb.toString());}
             }  // fall though
             case 68: break;
             default:
@@ -812,7 +797,7 @@ String op = "";
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [87] { throw new Error(\"Illegal character <\"+"+ZZ_NL+"                                                yytext()+\">\"); }");
+            System.out.println("action [83] { throw new Error(\"Illegal character <\"+"+ZZ_NL+"                                                yytext()+\">\"); }");
             { throw new Error("Illegal character <"+
                                                 yytext()+">");
             } 
@@ -820,49 +805,49 @@ String op = "";
           case 13: break;
           case 2: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [45] { /* ignore */ }");
+            System.out.println("action [46] { /* ignore */ }");
             { /* ignore */
             } 
             // fall through
           case 14: break;
           case 3: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [35] { return new Yytoken(SymbolTable.IDENTIFIER,yytext()); }");
+            System.out.println("action [36] { return new Yytoken(SymbolTable.IDENTIFIER,yytext()); }");
             { return new Yytoken(SymbolTable.IDENTIFIER,yytext());
             } 
             // fall through
           case 15: break;
           case 4: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [47] { return new Yytoken(SymbolTable.SYMBOL,yytext()); }");
+            System.out.println("action [48] { return new Yytoken(SymbolTable.SYMBOL,yytext()); }");
             { return new Yytoken(SymbolTable.SYMBOL,yytext());
             } 
             // fall through
           case 16: break;
           case 5: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [49] { sb.setLength(0); sb.append(yytext());yybegin(INTEGER); }");
+            System.out.println("action [50] { sb.setLength(0); sb.append(yytext());yybegin(INTEGER); }");
             { sb.setLength(0); sb.append(yytext());yybegin(INTEGER);
             } 
             // fall through
           case 17: break;
           case 6: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [39] { sb.setLength(0); yybegin(STRING); }");
+            System.out.println("action [40] { sb.setLength(0); yybegin(STRING); }");
             { sb.setLength(0); yybegin(STRING);
             } 
             // fall through
           case 18: break;
           case 7: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [106] { sb.append( yytext() ); }");
+            System.out.println("action [72] { sb.append( yytext() ); }");
             { sb.append( yytext() );
             } 
             // fall through
           case 19: break;
           case 8: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [101] { yybegin(YYINITIAL);"+ZZ_NL+"                               return new Yytoken(SymbolTable.STRING_LITERAL,"+ZZ_NL+"                               sb.toString()); }");
+            System.out.println("action [67] { yybegin(YYINITIAL);"+ZZ_NL+"                               return new Yytoken(SymbolTable.STRING_LITERAL,"+ZZ_NL+"                               sb.toString()); }");
             { yybegin(YYINITIAL);
                                return new Yytoken(SymbolTable.STRING_LITERAL,
                                sb.toString());
@@ -871,37 +856,8 @@ String op = "";
           case 20: break;
           case 9: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [53] { yybegin(YYINITIAL);"+ZZ_NL+"                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else{return new Yytoken(SymbolTable.INTEGER,sb.toString());} }");
-            { yybegin(YYINITIAL);
-                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else{return new Yytoken(SymbolTable.INTEGER,sb.toString());}
-            } 
-            // fall through
-          case 21: break;
-          case 10: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [74] { yybegin(YYINITIAL);"+ZZ_NL+"                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else{"+ZZ_NL+"                                    return new Yytoken(SymbolTable.INTEGER,sb.toString());} }");
-            { yybegin(YYINITIAL);
-                                if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){
-                                    throw new Error("Integer out of bound <"+
-                                                yytext()+">");}
-                                else{
-                                    return new Yytoken(SymbolTable.INTEGER,sb.toString());}
-            } 
-            // fall through
-          case 22: break;
-          case 11: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [89] { yybegin(YYINITIAL);sb.append(yytext());"+ZZ_NL+"                            if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else{"+ZZ_NL+"                                    return new Yytoken(SymbolTable.INTEGER,sb.toString());} }");
-            { yybegin(YYINITIAL);sb.append(yytext());
+            System.out.println("action [55] { yybegin(INT_VALID);sb.append(yytext());"+ZZ_NL+"                            if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else if(Integer.parseInt(sb.toString())<Integer.MIN_VALUE){"+ZZ_NL+"                                    throw new Error(\"Integer out of bound <\"+"+ZZ_NL+"                                                yytext()+\">\");}"+ZZ_NL+"                                else{"+ZZ_NL+"                                    return new Yytoken(SymbolTable.INTEGER,sb.toString());} }");
+            { yybegin(INT_VALID);sb.append(yytext());
                             if(Integer.parseInt(sb.toString())>Integer.MAX_VALUE){
                                     throw new Error("Integer out of bound <"+
                                                 yytext()+">");}
@@ -912,10 +868,24 @@ String op = "";
                                     return new Yytoken(SymbolTable.INTEGER,sb.toString());}
             } 
             // fall through
+          case 21: break;
+          case 10: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [81] { yybegin(YYINITIAL); }");
+            { yybegin(YYINITIAL);
+            } 
+            // fall through
+          case 22: break;
+          case 11: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [79] { yybegin(YYINITIAL);return new Yytoken(SymbolTable.SYMBOL,yytext()); }");
+            { yybegin(YYINITIAL);return new Yytoken(SymbolTable.SYMBOL,yytext());
+            } 
+            // fall through
           case 23: break;
           case 12: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [33] { return new Yytoken(SymbolTable.RESERVE_WORD,yytext()); }");
+            System.out.println("action [34] { return new Yytoken(SymbolTable.RESERVE_WORD,yytext()); }");
             { return new Yytoken(SymbolTable.RESERVE_WORD,yytext());
             } 
             // fall through
