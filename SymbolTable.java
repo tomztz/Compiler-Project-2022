@@ -1,7 +1,9 @@
 enum SymbolTable {
     IDENTIFIER,
-    EQ,
     STRING_LITERAL,
-    INTEGER
+    INTEGER,
+    RESERVE_WORD,
+    SYMBOL
+
 }
 
