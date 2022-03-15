@@ -1,0 +1,2 @@
+struct T {bool b}
+void main() {{T x;int y;y=x.B;}}

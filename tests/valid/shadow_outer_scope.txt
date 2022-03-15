@@ -1,0 +1,11 @@
+struct F {
+  int a
+}
+void main() {
+  {
+    F _;
+    {
+      bool _;
+    }
+  }
+}
