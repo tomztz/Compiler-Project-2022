@@ -1,0 +1,27 @@
+struct A {
+  int x,
+  int A
+}
+struct B {
+  string s_1,
+  A someA,
+  int gg
+}
+void main() {
+  foo(10);
+}
+
+struct C {
+  B B,
+  B C
+}
+
+void foo(int Y) {
+  {
+    C cc;
+    string S;
+    S =cc.B.s_1;
+    cc.C.someA.x = Y + cc.B.gg;
+    cc.C = cc.B;
+  }
+}
