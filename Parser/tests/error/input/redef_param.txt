@@ -1,2 +1,0 @@
-int fu(bool _1_, string __, string _1_) {{}}
-void main(){int b;}

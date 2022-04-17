@@ -1,3 +1,0 @@
-int foo() {{}}
-void foo(int a) {{}}
-void main() {{}}

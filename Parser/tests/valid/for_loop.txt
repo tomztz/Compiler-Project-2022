@@ -1,9 +1,0 @@
-void main() {{
-  bool x;
-  int I;
-  for (x=true or (I!=true);
-    !!!!x or ---  -- --I;
-    if (x==true) then for(I=I+1*2;I<=100*2;) x=!x;
-    )
-    printf("xxx");
-}}

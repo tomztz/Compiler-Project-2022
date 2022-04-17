@@ -1,9 +1,0 @@
-int Main() {{
-  int X;
-  if (X +10 <20*10 mod 78) then
-    if (10 != X) then
-      return 0*-1+X;
-    else
-      main();
-}}
-void main() {{}}

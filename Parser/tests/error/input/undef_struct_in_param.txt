@@ -1,6 +1,0 @@
-void main() {{}}
-void f(tt a) { {}
-}
-struct tt {
-  string b
-}

@@ -1,5 +1,0 @@
-struct T{
-  bool cC,
-  int Cc,
-  string cC
-}

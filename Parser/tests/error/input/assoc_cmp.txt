@@ -1,5 +1,0 @@
-string foo() {{
-  bool a;
-  int b;
-  a=b<2==false;
-}}

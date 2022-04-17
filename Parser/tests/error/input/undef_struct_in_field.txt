@@ -1,5 +1,0 @@
-void main() {{}}
-struct tt {
-  int a,
-  tt w
-}

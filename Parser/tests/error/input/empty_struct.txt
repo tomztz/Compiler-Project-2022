@@ -1,2 +1,0 @@
-struct f{}
-string f() {bool _;}

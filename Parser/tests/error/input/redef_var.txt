@@ -1,7 +1,0 @@
-void main() {
-  {
-    int a01;
-    bool A;
-    string a01;
-  }
-}

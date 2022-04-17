@@ -1,6 +1,0 @@
-void main() {
-  {
-    a=1;
-    string a;
-  }
-}

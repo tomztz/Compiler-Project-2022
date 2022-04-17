@@ -13,7 +13,6 @@
 %{
 public String idValue;
 
-
 public Object getLVal() {
   return idValue;
 }
@@ -35,10 +34,7 @@ DIGIT=[0-9]
 Punctuation = ";"|"<"|">"|"!"|"+"|"."|"="|"-"|"*"|"/"|"{"|"}"|"("|")"|","
 Integer = -?{DIGIT}{DIGIT}*
 
-
 %state SSTRING
-%state INTEGER
-
 
 %%
 
@@ -80,18 +76,9 @@ not                      {return NOT;}
 
 
 {Integer}                   { Short.parseShort(yytext());
-							yybegin(INTEGER);
                             return INT_LITERAL; }
 }
-<INTEGER>{
 
-{Punctuation}                   {yybegin(YYINITIAL); return yytext().charAt(0);}
-
-{WhiteSpace}                {yybegin(YYINITIAL);}
-
-(!{Punctuation}&&!{WhiteSpace})                    {throw new Error("Illegal character <"+
-                                                yytext()+">");}      		
-}
 <SSTRING>{
 \"                             { yybegin(YYINITIAL);
                                return STRING_LITERAL; }

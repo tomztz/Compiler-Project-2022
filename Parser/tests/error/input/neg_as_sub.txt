@@ -1,2 +1,0 @@
-int f() { f(1-2); }
-void main() {printf("abc");}

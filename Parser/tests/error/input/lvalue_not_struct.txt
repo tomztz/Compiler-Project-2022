@@ -1,1 +1,0 @@
-void main() {{string a;main(a.b.c);}}

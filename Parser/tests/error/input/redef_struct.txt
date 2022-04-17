@@ -1,3 +1,0 @@
-void main(){{}}
-struct T {int a}
-struct T {T b}

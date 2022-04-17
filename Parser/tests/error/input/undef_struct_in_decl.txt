@@ -1,4 +1,0 @@
-void main(){tt a;}
-struct tt {
-  bool x
-}

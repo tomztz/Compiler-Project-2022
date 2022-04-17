@@ -1,5 +1,0 @@
-void main() {{
-  int a1;
-  A1=1;
-}
-}
