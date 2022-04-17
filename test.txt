@@ -1,0 +1,17 @@
+void main() {{
+  bool x;
+  int I;
+
+  for (x=true or (I!=0);
+    !!!!x or (I==1);
+    if (x==true) then for(I=I+1*2;I<=100*2;I=I+1;) x=!x;
+    )
+    printf("xxx");
+}}
+
+int get(){{
+  int x;
+  x = 0;
+  return x;
+}}
+

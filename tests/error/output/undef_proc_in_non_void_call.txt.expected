@@ -1,0 +1,2 @@
+undef proc Foo
+ERROR

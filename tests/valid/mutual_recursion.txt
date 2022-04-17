@@ -1,0 +1,31 @@
+void main() {
+  f(false, 20*3+2);
+}
+bool f(bool a, int B1_) {
+  {
+    int xxX;
+    if ((B1_ < 30 + 2 * xxX) and (!(!a)) )then
+    {
+      int tT;
+      tT=G(B1_- 1);
+      return B1_ >= tT;
+      for(tT=10*--(--12); 3>4 ;) {
+        string tT;
+        ##return;
+        //        void a;
+        tT = "";
+      }
+    }
+    else
+      printf("  ??   ?");
+    return !(a);
+  }
+}
+int G(int __0) {
+  {
+    int y;
+    y =G(__0 == 10, 2 + __0 / 10);
+    f("6666", y);
+    return __0 mod 30;
+  }
+} //xxxx

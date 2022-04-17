@@ -1,0 +1,1 @@
+void main() {main( true and false or true);}

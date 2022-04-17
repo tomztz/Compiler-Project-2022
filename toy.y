@@ -12,6 +12,7 @@ import java.util.*;
   public final HashMap<String, Proc> procTable = new HashMap<String, Proc>();
   private final HashMap<String, Struct> structTable = new HashMap<String, Struct>();
   private Scope scope;
+  private Type scopeReturnType;
   /**
    * a map from function names to expected procedure types.
    */
@@ -23,7 +24,7 @@ import java.util.*;
 %token <String> ID
 %token BOOL INT TRUE FALSE VOID PRINTF STRING STRUCT IF THEN ELSE FOR RETURN
 
-%type <Type> return_type type expr l_expr var
+%type <Type> return_type type expr l_expr var bool_expr
 %type <Type[]> argument_list
 %type <ArrayList<Type>> nonempty_argument_list
 %type <HashMap<String, Type>> declaration_list nonempty_declaration_list
@@ -52,6 +53,12 @@ top:
         throw new Exception("undef proc " + name);
       }
     }
+
+    for(String keys : pendingProcCalls.keySet()){
+      if(procTable.get(keys).returnType.kind!=pendingProcCalls.get(keys).returnType.kind){
+        throw new Exception("invalid type");
+      }
+    }
   }
   ;
 
@@ -66,6 +73,7 @@ proc:
     {
       scope=new Scope(null);
       scope.varTable.putAll($4);
+      scopeReturnType=$1;
       scope=new Scope(scope);
       if (procTable.containsKey($2) || structTable.containsKey($2)) {
         throw new Exception("redef toplevel name " + $2);
@@ -114,6 +122,7 @@ type:
       }
       $$=new Type($1, s);
     }
+   
   ;
 
 return_type:
@@ -138,10 +147,14 @@ struct:
 
 stmt:
   FOR '(' ID '=' expr ';' expr ';' for_step_stmt ')' stmt
-  | IF '(' expr ')' THEN stmt
-  | IF '(' expr ')' THEN stmt ELSE stmt %prec ELSE
+  | IF '(' bool_expr ')' THEN stmt
+  | IF '(' bool_expr ')' THEN stmt ELSE stmt %prec ELSE
   | PRINTF '(' STRING_LITERAL ')' ';'
-  | RETURN expr ';'
+  | RETURN expr ';'{
+    if(scopeReturnType.kind!=$2.kind){
+      throw new Exception("wrong type");
+    }
+  }
   | '{' {scope=new Scope(scope);} statement_list '}'
     {
       scope = scope.parent;
@@ -155,14 +168,18 @@ stmt:
     }
   | l_expr '=' expr ';'
     {
+      if($1.kind!=$3.kind){
+         throw new Exception("incorrect type ");
+      }
     }
   | l_expr '=' ID '(' argument_list ')' ';'
     {
+      
       pendingProcCalls.put($3, new Proc($5, $1));
     }
   | ID '(' argument_list ')' ';'
     {
-      pendingProcCalls.put($1, new Proc($3, Type.ANY));
+      pendingProcCalls.put($1, new Proc($3, Type.VOID));
     }
   ;
 
@@ -187,6 +204,7 @@ l_expr:
     {$$=$1;}
   ;
 
+  
 var:
   ID
     {
@@ -222,24 +240,92 @@ expr:
   | STRING_LITERAL {$$=Type.STRING;}
   | TRUE {$$=Type.BOOL;}
   | FALSE {$$=Type.BOOL;}
-  | '-' expr %prec NEG {$$=Type.INT;}
-  | '!' expr {$$=Type.BOOL;}
+  | '-' expr %prec NEG { 
+    if ($2.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+      $$=Type.INT;}
+  | '!' expr {
+    if ($2.kind != Type.Kind.Bool) {
+        throw new Exception("not boolean");
+      }
+      $$=Type.BOOL;}
   | l_expr {$$=$1;}
   | '(' expr ')' {$$=$2;}
-  | expr '+' expr {$$=Type.INT;}
-  | expr '-' expr {$$=Type.INT;}
-  | expr '*' expr {$$=Type.INT;}
-  | expr '/' expr {$$=Type.INT;}
-  | expr MOD expr {$$=Type.INT;}
-  | expr AND expr {$$=Type.BOOL;}
-  | expr OR expr {$$=Type.BOOL;}
-  | expr NOT expr {$$=Type.BOOL;}
+  | expr '+' expr {
+     if ($1.kind != Type.Kind.Int || $3.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+    $$=Type.INT;}
+  | expr '-' expr {
+     if ($1.kind != Type.Kind.Int || $3.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+    $$=Type.INT;}
+  | expr '*' expr {
+     if ($1.kind != Type.Kind.Int || $3.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+    $$=Type.INT;}
+  | expr '/' expr {
+     if ($1.kind != Type.Kind.Int || $3.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+    $$=Type.INT;}
+  | expr MOD expr {
+     if ($1.kind != Type.Kind.Int || $3.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+    $$=Type.INT;}
+  | expr AND expr {
+     if ($1.kind != Type.Kind.Bool || $3.kind != Type.Kind.Bool) {
+        throw new Exception("not boolean");
+      }
+    $$=Type.BOOL;}
+  | expr OR expr {
+    if ($1.kind != Type.Kind.Bool || $3.kind != Type.Kind.Bool) {
+        throw new Exception("not boolean");
+      }
+    $$=Type.BOOL;}
+  | expr NOT expr {
+    if ($1.kind != Type.Kind.Bool || $3.kind != Type.Kind.Bool) {
+        throw new Exception("not boolean");
+      }
+    $$=Type.BOOL;}
   | expr EQ expr {$$=Type.BOOL;}
-  | expr '>' expr {$$=Type.BOOL;}
-  | expr '<' expr {$$=Type.BOOL;}
-  | expr GE expr {$$=Type.BOOL;}
-  | expr LE expr {$$=Type.BOOL;}
+  | expr '>' expr {
+    if ($1.kind != Type.Kind.Int || $3.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+      $$=Type.BOOL;}
+  | expr '<' expr {
+    if ($1.kind != Type.Kind.Int || $3.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+    $$=Type.BOOL;}
+  | expr GE expr {
+    if ($1.kind != Type.Kind.Int || $3.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+    $$=Type.BOOL;}
+  | expr LE expr {
+    if ($1.kind != Type.Kind.Int || $3.kind != Type.Kind.Int) {
+        throw new Exception("not integer");
+      }
+    $$=Type.BOOL;}
   | expr NE expr {$$=Type.BOOL;}
+;
+bool_expr:
+  expr{
+        
+      if ($1.kind != Type.Kind.Bool) {
+        throw new Exception("not boolean");
+      }
+      
+      $$ = Type.BOOL;
+    
+
+  }
 
 %%
 
