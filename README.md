@@ -14,7 +14,7 @@ team member : Tianze Zhang,Xiaolei Zhang
 4. to test your own code:\
    replace the content in test.txt to the code you want to test\
    run:\
-    `make start`\
+    `make start`
 5. remove the compiled files:\
     `make clean`
   
