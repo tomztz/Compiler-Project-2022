@@ -2,23 +2,23 @@
 team member : Tianze Zhang,Xiaolei Zhang
 
 ##Project description
-[description](../project.pdf)
+[description](https://github.com/tomztz/Compiler-Project-2022/master/project.pdf)
 ## Getting started
 1. make sure jflex and bison are installed
-2. compile the program:\
+2. compile the program:
   
-  `make`
+    `make`
 
-3.run all test cases we created:\
+3.run all test cases we created:
 
-  `make test`
+    `make test`
 
-4. to test your own code:\
+4. to test your own code:Z
 
 replace the content in test.txt to the code you want to test\
 
-run:\
- `make start`
+run:
+    `make start`
  
-5.remove the compiled files:\
-  `make clean`
+5.remove the compiled files:
+    `make clean`
