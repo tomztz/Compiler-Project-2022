@@ -1,0 +1,2 @@
+expected Bool for LHS of logical-and, found Int
+ERROR

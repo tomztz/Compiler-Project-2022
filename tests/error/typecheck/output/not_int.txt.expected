@@ -1,0 +1,2 @@
+expected Bool for operand of logical negation, found Int
+ERROR

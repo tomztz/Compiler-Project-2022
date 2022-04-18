@@ -1,0 +1,8 @@
+struct A{int a}
+void main() {
+  {
+    bool t;
+    A b;
+    t = b <= 12;
+  }
+}

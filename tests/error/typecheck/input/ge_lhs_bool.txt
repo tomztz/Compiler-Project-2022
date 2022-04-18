@@ -1,0 +1,6 @@
+void main() {
+  {
+    bool t;
+    t = t >= 12;
+  }
+}

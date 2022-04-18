@@ -1,0 +1,6 @@
+void main() {
+  {
+    bool s;
+    s = -12 and s;
+  }
+}

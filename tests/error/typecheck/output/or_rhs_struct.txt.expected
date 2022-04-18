@@ -1,0 +1,2 @@
+expected Bool for RHS of logical-or, found Struct
+ERROR

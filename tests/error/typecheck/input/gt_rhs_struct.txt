@@ -1,0 +1,8 @@
+struct T {int t}
+void main() {
+  {
+    bool t;
+    T tt;
+    t = 12 > tt;
+  }
+}

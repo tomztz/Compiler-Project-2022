@@ -1,0 +1,2 @@
+undef field _ in struct T
+ERROR

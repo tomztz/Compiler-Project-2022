@@ -1,0 +1,2 @@
+expected Bool for condition of if-statement, found Struct
+ERROR

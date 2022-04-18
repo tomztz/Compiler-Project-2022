@@ -1,0 +1,13 @@
+struct A {int a}
+struct B {int a}
+void main() {
+  {
+    A a;
+    int t;
+    t=foo(0,a);
+  }
+}
+
+int foo(int x, B y) {
+  return 1;
+}

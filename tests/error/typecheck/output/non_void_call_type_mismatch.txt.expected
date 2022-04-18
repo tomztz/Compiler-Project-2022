@@ -1,0 +1,2 @@
+expected String for argument 1 of function call foo, found Bool
+ERROR

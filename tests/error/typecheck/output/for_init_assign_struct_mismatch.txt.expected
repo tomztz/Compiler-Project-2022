@@ -1,0 +1,2 @@
+expected struct B for initial assignment of for-loop, found struct A
+ERROR

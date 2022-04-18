@@ -1,0 +1,2 @@
+expected Int for LHS of /, found Struct
+ERROR

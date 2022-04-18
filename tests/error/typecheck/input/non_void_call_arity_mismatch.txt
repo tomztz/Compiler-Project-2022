@@ -1,0 +1,10 @@
+void main() {
+  {
+    string a;
+  a=foo(1);
+  }
+}
+
+string foo(int a,int b) {
+  return "";
+}

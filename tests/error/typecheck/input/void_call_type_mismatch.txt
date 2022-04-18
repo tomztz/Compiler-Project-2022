@@ -1,0 +1,11 @@
+struct A {int x}
+void main() {
+  {
+  A aa;
+  foo(3,aa);
+  }
+}
+
+int foo(int x, string y) {
+  return 1;
+}

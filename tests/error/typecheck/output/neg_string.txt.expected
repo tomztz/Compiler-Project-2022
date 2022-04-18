@@ -1,0 +1,2 @@
+expected Int for operand of integer negation, found String
+ERROR

@@ -1,0 +1,7 @@
+void main() {
+  {
+    string b;
+    int x;
+    x = -(b+"");
+  }
+}

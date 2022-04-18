@@ -1,0 +1,7 @@
+void main() {
+  {
+    string s;
+    int a;
+    a = s mod 0;
+  }
+}

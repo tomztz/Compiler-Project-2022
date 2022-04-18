@@ -1,0 +1,2 @@
+expected struct A for assignment, found struct B
+ERROR

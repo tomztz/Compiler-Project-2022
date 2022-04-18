@@ -1,0 +1,2 @@
+type mismatch for ==, Int != String
+ERROR

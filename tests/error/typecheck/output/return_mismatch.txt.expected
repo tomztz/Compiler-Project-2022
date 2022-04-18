@@ -1,0 +1,2 @@
+expected struct A for return value of function foo, found struct B
+ERROR

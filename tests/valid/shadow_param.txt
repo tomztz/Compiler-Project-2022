@@ -1,4 +1,4 @@
-void main(){{}}
+void main(){{{}}}
 void foo(int a, string b) {
   int b;
 }

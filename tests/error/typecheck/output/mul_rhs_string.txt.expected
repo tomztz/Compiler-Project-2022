@@ -1,0 +1,2 @@
+expected Int for RHS of *, found String
+ERROR

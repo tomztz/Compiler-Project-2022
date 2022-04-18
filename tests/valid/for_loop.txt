@@ -1,9 +1,10 @@
 void main() {{
   bool x;
   int I;
-  for (x=true or (I!=true);
-    !!!!x or ---  -- --I;
-    if (x==true) then for(I=I+1*2;I<=100*2;) x=!x;
+  for (x=true or (I!=17/3);
+    !!!!x or (---  -- --I<1);
+    if (x==true) then for(I=I+1*2;I==(100- 0)/2;for(x=!false;x;)x=!x and (((I>12) and ((I<12) or (I >= 12))) and (I<=12));) x=!x;
     )
     printf("xxx");
+  printf("");
 }}

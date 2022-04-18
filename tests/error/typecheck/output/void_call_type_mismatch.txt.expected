@@ -1,0 +1,2 @@
+expected String for argument 2 of function call foo, found Struct
+ERROR

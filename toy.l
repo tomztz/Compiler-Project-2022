@@ -11,6 +11,9 @@
 %yylexthrow}
 
 %{
+StringBuilder sb = new StringBuilder();
+String op = "";
+
 public String idValue;
 
 public Object getLVal() {
@@ -20,22 +23,24 @@ public Object getLVal() {
 public void yyerror(String msg) {
   throw new RuntimeException("" + (yyline+1) + ": " + msg);
 }
-
-StringBuilder sb = new StringBuilder();
-String op = "";
 %}
 
 LineTerminator = \r|\n|\r\n
-WhiteSpace     = {LineTerminator}|[ \t]
-Comment = ("//"|"##").*
+InputCharacter = [^\r\n]
+WhiteSpace     = {LineTerminator}|[ \t\f]
+/* comments */
+Comment = {EndOfLineComment} | {ToYComment}
+
+// Comment can be the last line of the file, without line terminator.
+EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
+ToYComment = "##"{InputCharacter}* {LineTerminator}?
 
 Identifier = [a-zA-Z_][a-zA-Z0-9_]*
 DIGIT=[0-9]
-Punctuation = ";"|"<"|">"|"!"|"+"|"."|"="|"-"|"*"|"/"|"{"|"}"|"("|")"|","
-Integer = -?{DIGIT}{DIGIT}*
-
+Symbols = ";"|"<"|">"|"!"|"+"|"."|"="|"-"|"*"|"/"|"{"|"}"|"("|")"|","
+IntegerRex = -?{DIGIT}
+AlphaDigit = [0-9a-zA-Z_]
 %state SSTRING
-
 %%
 
 <YYINITIAL> {
@@ -62,7 +67,6 @@ return                      {return RETURN;}
 mod                      {return MOD;}
 and                      {return AND;}
 or                      {return OR;}
-not                      {return NOT;}
 
 {Identifier}                   { idValue = yytext(); return ID; }
 
@@ -70,22 +74,32 @@ not                      {return NOT;}
 "<="                    {return LE;}
 ">="                    {return GE;}
 "!="                    {return NE;}
-{Punctuation}                   { return yytext().charAt(0); }
+{Symbols}                   { return yytext().charAt(0); }
 
 \"                             { sb.setLength(0); yybegin(SSTRING); }
 
-
-{Integer}                   { Short.parseShort(yytext());
+//NOTE: checking for mixing integer with letters are not done here because we observe:if the code contains
+//any numeric values with letters, there will be no matching in the parser, and gives an error automatically
+{IntegerRex}{DIGIT}*{AlphaDigit}*                 { sb.setLength(0);sb.append(yytext());
+                            if(Short.parseShort(sb.toString())>Short.MAX_VALUE){    //check if integer is out of bound
+                                throw new Exception("Integer out of bound <"+
+                                    yytext()+">"); }
+                            else if(Short.parseShort(sb.toString())<Short.MIN_VALUE){
+                                throw new Exception("Integer out of bound <"+
+                                    yytext()+">"); }
                             return INT_LITERAL; }
 }
 
 <SSTRING>{
 \"                             { yybegin(YYINITIAL);
                                return STRING_LITERAL; }
-<<EOF>>                         {throw new Exception("unexpected EOF");}
-[^\n\r\"\\]+                   { sb.append( yytext() ); }
+<<EOF>>                         {throw new Exception("Illegal character <"+
+                                                yytext()+">");} // if not found a second semicolon at the end of the file
+                                                                //there is an error
+[^\"\\]+                   { sb.append( yytext() ); }           //otherwise append all characters
+\\                              {throw new Exception("Illegal character <"+
+                                                yytext()+">");}   //if backslash raise error
 }
-
 /* error fallback */
 [^]                              { throw new Exception("Illegal character <"+
                                                 yytext()+">"); }

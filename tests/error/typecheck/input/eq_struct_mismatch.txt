@@ -1,0 +1,14 @@
+struct A {
+  int a
+}
+struct B {
+  int a
+}
+void main() {
+  {
+    bool t;
+    A a;
+    B b;
+    t = a == b;
+  }
+}

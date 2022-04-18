@@ -1,0 +1,10 @@
+struct STRUCt {
+  int strucT
+}
+void main() {
+  {
+    STRUCt t;
+    bool s;
+    s = false or t;
+  }
+}

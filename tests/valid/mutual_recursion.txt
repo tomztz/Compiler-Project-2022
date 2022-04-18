@@ -11,21 +11,24 @@ bool f(bool a, int B1_) {
       return B1_ >= tT;
       for(tT=10*--(--12); 3>4 ;) {
         string tT;
-        ##return;
-        //        void a;
+        ##ret1j.vY@*urn;
+        //        void ^^a;
         tT = "";
       }
     }
     else
-      printf("  ??   ?");
+      printf("  ?? 
+ b  ?");
     return !(a);
   }
 }
 int G(int __0) {
-  {
+  {{{{{{
     int y;
-    y =G(__0 == 10, 2 + __0 / 10);
-    f("6666", y);
+    y =G(2 + __0 / 10);
+    {{{{{{{{{
+    f("6666"!="", y);
+    }}}}}}}}}
     return __0 mod 30;
-  }
+  }}}}}}
 } //xxxx

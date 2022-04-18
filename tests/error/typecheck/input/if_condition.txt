@@ -1,0 +1,9 @@
+struct AA {
+  int aa
+}
+void main() {
+  {
+    AA abc;
+    if (abc) then {}
+  }
+}

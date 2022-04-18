@@ -1,0 +1,80 @@
+struct A {
+  string a,
+  int b,
+  bool c
+}
+struct B {
+  A a,
+  string a1,
+  int b1,
+  bool c1
+}
+void main() {
+  {
+    B bb;
+    bb.a1 = bar();
+    A aa;
+    bb.b1 = foo(bb, aa);
+  }
+}
+int foo(B b, A a) {
+  {
+    A aa;
+    aa = b.a;
+    return (10+2 mod -17)/aa.b;
+    for (aa=b.a; !aa.c;)
+      if (!!!!!b.a.c and (b.a1 != a.a + "acc")) then {} else {}
+    return -a.b + b.a.b - b.b1;
+    return 12;
+    return -(10);
+    return aa.b;
+    return 12+23;
+    return 12- 23;
+    return aa.b*23;
+    return 12/aa.b;
+    return 12 mod aa.b;
+  }
+}
+bool boo() {
+  {
+    B bb;
+    return true and false;
+    return !false or true;
+    return !!bb.c1;
+    return bb.a1=="a";
+    return 12==bb.b1;
+    return bb.c1 == true;
+    return bb==bb;
+    return bb.a1!="a";
+    return 12!=bb.b1;
+    return bb.c1 != true;
+    return bb!=bb;
+    return bb.a1>"a";
+    return bb.b1>-12;
+    return bb.a1<"a";
+    return bb.b1<-12;
+    return bb.a1>="a";
+    return bb.b1>=-12;
+    return bb.a1<="a";
+    return bb.b1<=-12;
+  }
+}
+string bar() {
+  {
+    B b1;
+    return b1.a1 + ("
+    "+b1.a.a);
+  }
+}
+B baz() {
+  {
+    B B;
+    B.a.c = !  B.c1 or B.a.c;
+    B = baz();
+    B.c1 = false;
+    baz();
+    main();
+    foo(B, B.a);
+    return B;
+  }
+}

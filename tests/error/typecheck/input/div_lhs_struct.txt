@@ -1,0 +1,8 @@
+struct aa{int aa}
+void main() {
+  {
+    aa aa;
+    int a;
+    a = aa / 1;
+  }
+}
