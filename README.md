@@ -10,11 +10,11 @@ team member : Tianze Zhang,Xiaolei Zhang
   
     `make`
 
-3.run all test cases we created:\
+3.run all test cases we created:
 
   `make test`
 
-4. to test your own code:
+ 4.to test your own code:
 
   replace the content in test.txt to the code you want to test\
 
